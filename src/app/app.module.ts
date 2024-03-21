@@ -5,15 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DatatableModule } from './shared/datatable/datatable.module';
 import { MyComponent } from './my/my.component';
+import { DatatableComponent } from './shared/datatable/datatable.component';
+import { HttpService } from './service/http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DatatableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DatatableModule
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

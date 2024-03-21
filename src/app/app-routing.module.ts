@@ -6,7 +6,7 @@ import { DatatableComponent } from './shared/datatable/datatable.component';
 const routes: Routes = 
 [
   {path: 'my-component', component: MyComponent},
-  {path: 'datatable', component: DatatableComponent}
+  // {path: 'datatable', component: DatatableComponent}
 ];
 
 @NgModule({
