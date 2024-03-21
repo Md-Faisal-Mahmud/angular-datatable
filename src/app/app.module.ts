@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DatatableComponent } from './shared/datatable/datatable.component';
+import { DatatableModule } from './shared/datatable/datatable.module';
+import { MyComponent } from './my/my.component';
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { DatatableComponent } from './shared/datatable/datatable.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
