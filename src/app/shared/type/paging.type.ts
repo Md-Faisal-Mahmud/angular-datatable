@@ -9,3 +9,4 @@ export interface SortOrder {
   name: string;
   order: SortOrderType
 }
+

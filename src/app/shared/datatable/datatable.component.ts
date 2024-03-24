@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Datatable } from './datatable.type';
 import { HttpService } from '../../service/http.service';
-import { SortOrder } from '../type/paging.type';
 import { Observable, of } from 'rxjs';
 import { PaginateResult } from '../type/resut.type';
+import { SortOrder, SortOrderType } from '../type/paging.type';
 
 interface Product 
 {
@@ -32,7 +31,7 @@ export class DatatableComponent implements OnInit
   // isLoading: boolean = true;
   currentPageIndex: number = 1;
   totalRows: number = 0;
-  // sortColumns: SortOrder[] = [];
+  sortColumns: SortOrder[] = [];
   // filters: Filter[] = [];
   row$: Observable<any[]> = of([]);
   // generalSearchValue: string = "";
@@ -50,11 +49,11 @@ export class DatatableComponent implements OnInit
   {
     let requestBody = 
     {
-      // pageIndex: this.currentPageIndex,
-      // pageSize: this.pageSize
+      pageIndex: this.currentPageIndex,
+      pageSize: this.pageSize
     }
 
-    this.httpService.post<any>(this.endpoint, requestBody)
+    this.httpService.post<PaginateResult<any>>(this.endpoint, requestBody)
     .subscribe(res => 
       {
         if (res) 
@@ -64,7 +63,16 @@ export class DatatableComponent implements OnInit
           console.log('items',res)
         }
       });
-
-
   }
+
+  onSort(name: string, order: SortOrderType) {
+    this.sortColumns = [
+      {
+        name: name,
+        order: order
+      }
+    ];
+    this.loadData();
+  }
+
 }

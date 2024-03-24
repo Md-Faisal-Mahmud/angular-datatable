@@ -1,2 +1,44 @@
 
 <p>datatable works</p>
+<table class="table">
+    <thead>
+    <tr class="nunito fw-600 font-xsm black border-bottom">
+      <th scope="col" class="d-md-table-cell" [class.d-none]="column.isHideAble" *ngFor="let column of setting.columns">
+        {{column.title}}
+        <span
+          *ngIf="column.isSortable"
+          class="sort-column"
+          (click)="onSort(column.name, 1)"
+          [ngClass]="isSortActive(column.name, 1) ? 'sort-active' : ''">▼</span>
+        <span
+          *ngIf="column.isSortable"
+          class="sort-column"
+          (click)="onSort(column.name, 2)"
+          [ngClass]="isSortActive(column.name, 2) ? 'sort-active' : ''">▲</span>
+      </th>
+    </tr>
+    </thead>
+    <tbody [ngClass]="isLoading ? 'active-loading' : ''">
+    <tr class="nunito font-xsm" *ngFor="let row of row$ | async">
+      <td class="d-md-table-cell" [class.d-none]="column.isHideAble" *ngFor="let column of setting.columns">
+        <span *ngIf="column.formatter == null">{{row[column.name]}}</span>
+        <div *ngIf="column.formatter && column.action" (click)="column.action(row)"
+             [innerHTML]="column.formatter(row) | safeHtml"></div>
+        <div *ngIf="column.formatter && !column.action" [innerHTML]="column.formatter(row) | safeHtml"></div>
+      </td>
+    </tr>
+    <psc-preloader *ngIf="isLoading"></psc-preloader>
+    </tbody>
+  </table>
+  <div class="d-flex justify-content-end">
+    <ngb-pagination
+      class="pe-2"
+      [collectionSize]="totalRows"
+      [maxSize]="5"
+      [rotate]="true"
+      [(page)]="currentPageIndex"
+      [pageSize]="pageSize"
+      (pageChange)="onPageChange($event)">
+    </ngb-pagination>
+  </div>
+  

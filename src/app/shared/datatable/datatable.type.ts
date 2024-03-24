@@ -29,3 +29,4 @@ export class DatatableColumn
         this.action = action;
       }
 }
+
